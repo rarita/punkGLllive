@@ -157,6 +157,8 @@
     <ClInclude Include="nd_vector.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="primitives.h" />
+    <ClInclude Include="render.h" />
+    <ClInclude Include="scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="canvas.cpp" />
@@ -171,6 +173,7 @@
     </ClCompile>
     <ClCompile Include="primitives.cpp" />
     <ClCompile Include="punkGLxx.cpp" />
+    <ClCompile Include="render.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

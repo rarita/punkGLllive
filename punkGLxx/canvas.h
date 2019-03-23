@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "scene.h"
 #include "color.h"
 typedef unsigned int uint;
 
@@ -7,6 +8,8 @@ class Canvas {
 public:
 	Canvas(uint x, uint y, RGB &bg_color); // Конструктор
 	void put_point(int x, int y, RGB &color); // Красим точку
+	void ssaa(uint samples, uint rays, double threshold, double offset, RenderParams &params, Scene &scene);
+	bool sample_needed(int x, int y, double threshold);
 	void dump(); // Сливаем весь холст в нужный поток
 	void dumpHEX(string filename); // То же самое но в HEX для экономии места
 	void dumpBMP(string filename);

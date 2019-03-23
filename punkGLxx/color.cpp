@@ -7,6 +7,13 @@
 using namespace std;
 typedef unsigned int uint;
 
+RGB::RGB()
+{
+	R = 0;
+	G = 0;
+	B = 0;
+}
+
 RGB::RGB(uint r, uint g, uint b) {
 	R = max(0U, min(r, 255U));
 	G = max(0U, min(g, 255U));

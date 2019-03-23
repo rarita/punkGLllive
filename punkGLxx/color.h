@@ -6,6 +6,7 @@ typedef unsigned int uint;
 
 class RGB {
 public:
+	RGB();
 	RGB(uint r, uint g, uint b);
 	uint const getR();
 	uint const getG();
