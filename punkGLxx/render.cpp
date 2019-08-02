@@ -30,7 +30,7 @@ double calculateLightning(Vector3D &point, Vector3D &normal, Vector3D &view, Sce
 		intensity += point_l.calculateReflections(normal, view, light_vector, specular);
 	}
 	for (auto &direct_l : lights.directional_lights) {
-		Vector3D light_pos_pointer = (direct_l.getPosition()); // Сэйв памяти по максимуму. В функцию не пихается, т.к. замкнутый указатель.
+		Vector3D light_pos_pointer = (direct_l.getPosition());
 		intensity += direct_l.calculateReflections(normal, view, light_pos_pointer, specular);
 	}
 	return intensity;
@@ -57,13 +57,13 @@ RGB traceRay(Vector3D &origin, Vector3D &direction, double min_t, double max_t, 
 
 	if (withLight) {
 		Vector3D point = (direction * closest_t) + origin;
-		Vector3D closest_sphere_center = closest_sphere->getCenter(); // Сука const_cast так и не заработал ни разу.
-		Vector3D normal_t = point - closest_sphere_center; // Тоже простор для оптимизации по памяти
+		Vector3D closest_sphere_center = closest_sphere->getCenter();
+		Vector3D normal_t = point - closest_sphere_center;
 		Vector3D normal = normal_t * (1.0 / normal_t.length());
 
 		Vector3D view = direction * -1.0;
 		double lightning = calculateLightning(point, normal, view, scene.lights, closest_sphere->getSpecular());
-		RGB sphere_color = closest_sphere->getColor(); // const_cast zaebal :(
+		RGB sphere_color = closest_sphere->getColor();
 		return sphere_color * lightning;
 	}
 	return closest_sphere->getColor();
@@ -79,7 +79,7 @@ Canvas render(RenderParams &params, Scene &scene, bool withLight) {
 		for (int y = -h / 2; y < h / 2; y++) {
 			if (x == 0 && y == 0) cout << "[I] 50% Done..." << endl;
 			Vector3D direction = canvasToViewport(x, y, params.viewport_size, params.projection_plane_z, canvas);
-			Vector3D cameraPos = params.cameraPosition; // Придумать как задоджить такое разыменование const
+			Vector3D cameraPos = params.cameraPosition;
 			RGB bgcolor = params.backgroundColor;
 			RGB pointColor = traceRay(cameraPos, direction, 1, numeric_limits<double>::infinity(), scene, bgcolor, withLight);
 			canvas.put_point(x, y, pointColor);
